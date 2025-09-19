@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="menuScreen" class="screen">
+            <h1>ASTEROIDS</h1>
+            <div class="menu-section">
+                <h2>Ship Color</h2>
+                <div id="shipColorSelector" class="color-selector">
+                    <button class="color-option" data-color="#00FF88" style="background-color: #00FF88">Green</button>
+                    <button class="color-option" data-color="#0088FF" style="background-color: #0088FF">Blue</button>
+                    <button class="color-option" data-color="#FF0088" style="background-color: #FF0088">Pink</button>
+                    <button class="color-option" data-color="#FF8800" style="background-color: #FF8800">Orange</button>
+                    <button class="color-option" data-color="#8800FF" style="background-color: #8800FF">Purple</button>
+                </div>
+            </div>
+            <div class="menu-section">
+                <h2>Difficulty</h2>
+                <div id="difficultySelector">
+                    <button class="difficulty-option" data-difficulty="easy">Easy</button>
+                    <button class="difficulty-option" data-difficulty="medium">Medium</button>
+                    <button class="difficulty-option" data-difficulty="hard">Hard</button>
+                </div>
+            </div>
+            <button id="startButton" class="start-button">Start Game</button>
+        </div>
+
+        <div id="gameScreen" class="screen hidden">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+        </div>
+
+        <div id="gameOverScreen" class="screen hidden overlay">
+            <h2>GAME OVER</h2>
+            <div id="finalScore">Final Score: <span id="finalScoreValue">0</span></div>
+            <button id="restartButton" class="restart-button">Play Again</button>
+            <button id="menuButton" class="menu-button">Main Menu</button>
+        </div>
+
+    </div>
+
+    <!-- Load JavaScript modules -->
+    <script type="module" src="src/lib/Vector2D.js"></script>
+    <script type="module" src="src/models/Ship.js"></script>
+    <script type="module" src="src/models/Asteroid.js"></script>
+    <script type="module" src="src/models/Projectile.js"></script>
+    <script type="module" src="src/models/Particle.js"></script>
+    <script type="module" src="src/services/PhysicsEngine.js"></script>
+    <script type="module" src="src/services/InputManager.js"></script>
+    <script type="module" src="src/services/Renderer.js"></script>
+    <script type="module" src="src/services/GameState.js"></script>
+    <script type="module" src="src/services/EntityManager.js"></script>
+    <script type="module" src="src/Game.js"></script>
+    <script type="module" src="src/main.js?v=menu-fixed"></script>
+</body>
+</html>
