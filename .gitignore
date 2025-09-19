@@ -1,0 +1,24 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Node / tooling (none present, but safe defaults)
+node_modules/
+.npm/
+
+# Env / secrets
+.env
+.env.*
+
+# Cursor / IDE
+.cursor/
+.vscode/
+.idea/
+
+# Build artifacts
+/dist/
+/build/
+
+# Empty directories placeholder
+asteroids-in-js/src/components/.gitkeep
