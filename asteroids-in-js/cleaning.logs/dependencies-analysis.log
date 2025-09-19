@@ -1,0 +1,158 @@
+=== DEPENDENCIES ANALYSIS LOG ===
+Generated: 2025-09-16
+
+=== FILE HIERARCHY ===
+/
+├── index.html
+├── styles.css
+├── test.html
+├── src/
+│   ├── main.js
+│   ├── Game.js
+│   ├── lib/
+│   │   └── Vector2D.js
+│   ├── models/
+│   │   ├── Ship.js
+│   │   ├── Asteroid.js
+│   │   ├── Projectile.js
+│   │   └── Particle.js
+│   └── services/
+│       ├── EntityManager.js
+│       ├── GameState.js
+│       ├── InputManager.js
+│       ├── PhysicsEngine.js
+│       └── Renderer.js
+└── tests/
+    ├── test-runner.js
+    ├── contract/
+    │   ├── automatic-firing.test.js
+    │   ├── physics-engine.test.js
+    │   └── ship-movement.test.js
+    ├── integration/
+    │   ├── game-flow.test.js
+    │   └── user-scenarios.test.js
+    ├── performance/
+    │   ├── frame-rate.test.js
+    │   └── memory-usage.test.js
+    └── cross-browser/
+        ├── compatibility.test.js
+        └── feature-detection.test.js
+
+=== MODULE DEPENDENCIES GRAPH ===
+
+index.html
+└── imports: src/main.js
+
+src/main.js
+└── imports: Game.js
+
+src/Game.js
+├── imports: models/Ship.js
+├── imports: services/PhysicsEngine.js
+├── imports: services/InputManager.js
+├── imports: services/Renderer.js
+├── imports: services/GameState.js
+└── imports: services/EntityManager.js
+
+src/services/EntityManager.js
+├── imports: models/Asteroid.js
+├── imports: models/Projectile.js
+└── imports: models/Particle.js
+
+src/services/PhysicsEngine.js
+└── imports: lib/Vector2D.js
+
+All Model Files (Ship, Asteroid, Projectile, Particle)
+└── imports: lib/Vector2D.js
+
+=== CRITICAL PATH MAPPINGS ===
+
+User Interaction → Game Start:
+1. index.html → main.js:AsteroidsApp
+2. main.js:startGame() → Game.js:startNewGame()
+3. Game.js → EntityManager:createAsteroidField()
+4. Game.js → Ship:constructor()
+5. Game.js:gameLoop() → continuous
+
+Game Loop Critical Path:
+1. Game.js:gameLoop()
+2. → Game.js:update()
+3. → InputManager:processInput()
+4. → EntityManager:update()
+5. → PhysicsEngine:updateEntities()
+6. → PhysicsEngine:detectCollisions()
+7. → Game.js:render()
+8. → Renderer:render()
+
+Collision Handling Path:
+1. PhysicsEngine:detectCollisions()
+2. → Game.js:handleCollisions()
+3. → Ship/Asteroid/Projectile:onCollision()
+4. → EntityManager:destroyEntity()
+5. → GameState:updateScore()
+
+=== CROSS-FILE RELATIONSHIPS ===
+
+main.js ←→ Game.js
+- main.js creates and controls Game instance
+- Game.js reports state back to main.js
+
+Game.js ←→ All Services
+- Game.js orchestrates all service modules
+- Services are independent of each other
+
+EntityManager ←→ All Models
+- EntityManager creates/destroys all entities
+- Models are independent of EntityManager
+
+Vector2D ← All Physics-based Modules
+- Used by all models for position/velocity
+- Used by PhysicsEngine for calculations
+
+=== FUNCTION CALL CHAINS ===
+
+Menu Selection:
+main.js:selectShipColor() → updateOptionSelection() → DOM update
+main.js:selectDifficulty() → updateOptionSelection() → DOM update
+
+Game Start:
+main.js:startGame()
+→ showScreen()
+→ Game.js:resize()
+→ Game.js:startNewGame()
+→ EntityManager:createAsteroidField()
+
+Input Processing:
+InputManager:processInput()
+→ Ship:accelerate()/rotate()
+→ Auto-fire timer check
+→ Return projectile data
+
+Collision Chain:
+PhysicsEngine:detectCollisions()
+→ Game.js:handleCollisions()
+→ EntityManager:destroyAsteroid()
+→ EntityManager:createParticleEffect()
+→ GameState:recordAsteroidDestroyed()
+
+=== EXTERNAL DEPENDENCIES ===
+
+Browser APIs Used:
+- Canvas 2D Context API
+- RequestAnimationFrame
+- LocalStorage API
+- Performance API
+- Document/Window Events
+
+No NPM packages or external libraries used.
+Pure vanilla JavaScript implementation.
+
+=== TEST DEPENDENCIES ===
+
+test.html imports:
+- tests/test-runner.js
+- All test files in tests/
+
+Test files import source modules for testing:
+- Direct imports of models/services
+- No mock frameworks used
